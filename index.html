@@ -1,0 +1,721 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EliteVPS — Servidores VPS de Alta Performance | São Paulo, Brasil</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#050810;--bg2:#0a0e1a;--bg3:#0f1320;
+--card:#111628;--card-hover:#161d35;
+--accent:#6d28d9;--accent-l:#8b5cf6;--accent-g:linear-gradient(135deg,#6d28d9,#7c3aed,#8b5cf6);
+--cyan:#06b6d4;--cyan-d:#0891b2;
+--red:#ef4444;--rose:#f43f5e;
+--green:#10b981;--emerald:#34d399;
+--gold:#f59e0b;--amber:#fbbf24;
+--discord:#5865F2;--whatsapp:#25D366;
+--text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;
+--border:rgba(148,163,184,0.08);--border2:rgba(148,163,184,0.12);
+--glass:rgba(17,22,40,0.6);
+--glow-purple:rgba(109,40,217,0.15);--glow-cyan:rgba(6,182,212,0.12)
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+
+/* === BG === */
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
+background-image:linear-gradient(rgba(109,40,217,0.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(109,40,217,0.025) 1px,transparent 1px);
+background-size:80px 80px}
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-orbs::before,.bg-orbs::after{content:'';position:absolute;border-radius:50%;filter:blur(120px)}
+.bg-orbs::before{width:800px;height:800px;top:-300px;left:-200px;
+background:radial-gradient(circle,rgba(109,40,217,0.08),transparent 70%);animation:orbFloat 25s ease-in-out infinite}
+.bg-orbs::after{width:600px;height:600px;bottom:-200px;right:-100px;
+background:radial-gradient(circle,rgba(6,182,212,0.06),transparent 70%);animation:orbFloat 20s ease-in-out infinite reverse}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(40px,-30px)}50%{transform:translate(-20px,40px)}75%{transform:translate(30px,20px)}}
+
+.container{max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* === NAV === */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;
+background:rgba(5,8,16,0.7);backdrop-filter:blur(30px) saturate(1.5);
+border-bottom:1px solid var(--border);transition:all 0.3s}
+.nav.scrolled{background:rgba(5,8,16,0.92);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.logo-mark{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+background:var(--accent-g);font-weight:900;font-size:1.3rem;color:#fff;position:relative;overflow:hidden}
+.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);border-radius:inherit}
+.logo-text{font-size:1.4rem;font-weight:900;letter-spacing:-0.5px}
+.logo-text span{background:var(--accent-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-tag{font-size:0.65rem;color:var(--text3);font-weight:500;display:flex;align-items:center;gap:4px;margin-top:2px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.88rem;font-weight:500;
+transition:all 0.3s;position:relative;padding:4px 0}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+background:var(--accent-g);transition:width 0.3s;border-radius:2px}
+.nav-links a:hover::after{width:100%}
+.nav-btns{display:flex;gap:10px}
+.burger{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;
+padding:8px;border-radius:8px;transition:background 0.2s}
+.burger:hover{background:rgba(255,255,255,0.05)}
+
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;
+background:rgba(5,8,16,0.97);backdrop-filter:blur(24px);z-index:199;
+padding:20px;overflow-y:auto;flex-direction:column;gap:4px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:var(--text2);text-decoration:none;padding:16px;border-radius:12px;
+font-size:1rem;font-weight:500;transition:all 0.2s;display:flex;align-items:center;gap:10px}
+.mob-menu a:hover{background:rgba(109,40,217,0.08);color:var(--text)}
+.mob-menu .mob-btns{display:flex;flex-direction:column;gap:10px;margin-top:20px;
+padding-top:20px;border-top:1px solid var(--border)}
+
+/* === BTNS === */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;
+font-size:0.9rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;
+transition:all 0.3s ease;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s;
+background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent)}
+.btn:hover::before{opacity:1}
+.btn-primary{background:var(--accent-g);color:#fff;box-shadow:0 4px 20px rgba(109,40,217,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(109,40,217,0.5)}
+.btn-ghost{background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--accent-l);color:var(--text);background:rgba(109,40,217,0.06)}
+.btn-discord{background:var(--discord);color:#fff}
+.btn-discord:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(88,101,242,0.4);filter:brightness(1.1)}
+.btn-wa{background:var(--whatsapp);color:#fff}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,0.4);filter:brightness(1.1)}
+.btn-buy{background:var(--accent-g);color:#fff;width:100%;justify-content:center;
+padding:14px;border-radius:12px;font-size:0.95rem;font-weight:700}
+.btn-buy:hover{box-shadow:0 8px 28px rgba(109,40,217,0.4);transform:translateY(-1px)}
+.btn-game{width:100%;justify-content:center;padding:14px;border-radius:12px;font-size:0.95rem;font-weight:700;color:#fff}
+.btn-sm{padding:8px 16px;font-size:0.82rem;border-radius:8px}
+
+/* === HERO === */
+.hero{min-height:90vh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
+.hero-content{max-width:1280px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-left{position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:50px;
+background:rgba(109,40,217,0.08);border:1px solid rgba(109,40,217,0.2);
+margin-bottom:24px;font-size:0.82rem;color:var(--accent-l)}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+box-shadow:0 0 12px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.08;
+letter-spacing:-1.5px;margin-bottom:20px}
+.hero h1 .g{background:linear-gradient(135deg,#8b5cf6,#06b6d4,#f43f5e);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-size:300% 300%;animation:gShift 5s ease infinite}
+@keyframes gShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-desc{font-size:1.1rem;color:var(--text2);max-width:520px;margin-bottom:32px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.hero-trust{display:flex;gap:40px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text2)}
+.trust-item .ti{font-size:1.1rem}
+
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-visual{width:100%;max-width:500px;aspect-ratio:1;position:relative}
+.hv-ring{position:absolute;border-radius:50%;border:1px solid var(--border);animation:spin 40s linear infinite}
+.hv-ring.r1{inset:0}
+.hv-ring.r2{inset:12%;animation-direction:reverse;animation-duration:30s;border-color:rgba(109,40,217,0.12)}
+.hv-ring.r3{inset:24%;animation-duration:20s;border-color:rgba(6,182,212,0.1)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hv-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:140px;height:140px;border-radius:50%;
+background:var(--accent-g);display:flex;align-items:center;justify-content:center;
+font-size:3.2rem;box-shadow:0 0 80px rgba(109,40,217,0.3)}
+.hv-node{position:absolute;width:56px;height:56px;border-radius:16px;
+background:var(--card);border:1px solid var(--border2);
+display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:nodeFloat 4s ease-in-out infinite}
+@keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hv-node:nth-child(2){top:8%;left:50%;transform:translateX(-50%);animation-delay:0s}
+.hv-node:nth-child(3){top:50%;right:4%;transform:translateY(-50%);animation-delay:0.5s}
+.hv-node:nth-child(4){bottom:8%;left:50%;transform:translateX(-50%);animation-delay:1s}
+.hv-node:nth-child(5){top:50%;left:4%;transform:translateY(-50%);animation-delay:1.5s}
+.hv-node:nth-child(6){top:18%;right:12%;animation-delay:0.7s}
+.hv-node:nth-child(7){bottom:18%;left:12%;animation-delay:1.2s}
+
+/* === STRIP === */
+.strip{padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+background:rgba(10,14,26,0.5)}
+.strip-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.strip-item{display:flex;align-items:center;gap:10px;padding:14px 16px;
+border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all 0.3s}
+.strip-item:hover{border-color:rgba(109,40,217,0.3);transform:translateY(-2px)}
+.strip-icon{font-size:1.3rem;flex-shrink:0}
+.strip-item h4{font-size:0.78rem;font-weight:700;white-space:nowrap}
+.strip-item p{font-size:0.68rem;color:var(--text3)}
+
+/* === SECTIONS === */
+.section{padding:100px 0}
+.s-head{text-align:center;margin-bottom:56px}
+.s-label{display:inline-flex;align-items:center;gap:6px;font-size:0.72rem;font-weight:700;
+text-transform:uppercase;letter-spacing:2px;color:var(--accent-l);
+background:rgba(109,40,217,0.08);padding:6px 16px;border-radius:20px;margin-bottom:14px}
+.s-head h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-0.5px;margin-bottom:14px}
+.s-head p{color:var(--text2);max-width:560px;margin:0 auto;font-size:0.95rem}
+
+/* === PLANS === */
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+.tab{padding:10px 22px;border-radius:10px;font-size:0.85rem;font-weight:600;cursor:pointer;
+border:1px solid var(--border);background:transparent;color:var(--text3);transition:all 0.3s}
+.tab.on,.tab:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:18px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:20px;
+overflow:hidden;transition:all 0.4s;position:relative}
+.pcard:hover{transform:translateY(-6px);border-color:rgba(109,40,217,0.3);
+box-shadow:0 24px 64px rgba(109,40,217,0.1)}
+.pcard.hot{border-color:var(--cyan);box-shadow:0 0 40px rgba(6,182,212,0.08)}
+.pcard.hot .phead{background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(109,40,217,0.06))}
+.hot-tag{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,var(--cyan),var(--green));
+color:var(--bg);font-size:0.68rem;font-weight:800;padding:4px 10px;border-radius:6px;
+text-transform:uppercase;letter-spacing:0.5px}
+.phead{padding:26px 26px 18px;border-bottom:1px solid var(--border);
+background:linear-gradient(135deg,rgba(109,40,217,0.04),transparent)}
+.cpu-tag{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;
+text-transform:uppercase;letter-spacing:0.8px;padding:4px 10px;border-radius:6px;margin-bottom:8px}
+.cpu-ryzen{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2)}
+.cpu-xeon{background:rgba(6,182,212,0.1);color:var(--cyan);border:1px solid rgba(6,182,212,0.2)}
+.pname{font-size:1.15rem;font-weight:800;margin-bottom:6px}
+.pprice{display:flex;align-items:baseline;gap:3px}
+.pprice .cur{font-size:0.95rem;color:var(--cyan);font-weight:700}
+.pprice .val{font-size:2.5rem;font-weight:900;line-height:1}
+.pprice .c{font-size:0.9rem;color:var(--text3)}
+.pper{font-size:0.78rem;color:var(--text3)}
+.pbody{padding:20px 26px 26px}
+.pspecs{list-style:none;margin-bottom:22px}
+.pspecs li{display:flex;align-items:center;gap:9px;padding:7px 0;
+font-size:0.86rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.02)}
+.pspecs li:last-child{border:none}
+.pspecs li strong{color:var(--text);font-weight:600}
+.si{width:20px;text-align:center;font-size:0.85rem;flex-shrink:0}
+.unlimited{display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;font-weight:700;
+background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(6,182,212,0.12));
+border:1px solid rgba(16,185,129,0.2);color:var(--green);padding:2px 8px;border-radius:5px}
+
+/* === GAMES === */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
+.gcard{background:var(--card);border:1px solid var(--border);border-radius:20px;
+overflow:hidden;transition:all 0.4s}
+.gcard:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.2)}
+.gbanner{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.gbanner::before{content:'';position:absolute;inset:0;
+background:radial-gradient(circle at center,rgba(255,255,255,0.04),transparent 70%)}
+.gbanner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;
+background:linear-gradient(transparent,var(--card))}
+.gbanner.dayz{background:linear-gradient(135deg,#1a0f2e,#0f1a3e,#0f2a4e)}
+.gbanner.scum{background:linear-gradient(135deg,#1a2e0f,#0f3e1a,#1a4e2a)}
+.gbanner.fivem{background:linear-gradient(135deg,#2e1a0f,#3e2a0f,#4e3a1a)}
+.gbig{font-size:5.5rem;position:relative;z-index:1;filter:drop-shadow(0 4px 30px rgba(0,0,0,0.3));
+animation:nodeFloat 5s ease-in-out infinite}
+.gover{position:absolute;bottom:14px;left:22px;z-index:2}
+.gover h3{font-size:1.5rem;font-weight:900;text-shadow:0 2px 12px rgba(0,0,0,0.5)}
+.gover span{font-size:0.78rem;color:var(--text3)}
+.gbody{padding:22px}
+.gfeats{list-style:none;margin-bottom:18px}
+.gfeats li{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:0.86rem;color:var(--text2)}
+.gprice{display:flex;align-items:center;justify-content:space-between;
+padding:14px 0;border-top:1px solid var(--border);margin-bottom:16px}
+.gprice-l{font-size:0.82rem;color:var(--text3)}
+.gprice-v{font-size:1.3rem;font-weight:800;color:var(--gold)}
+
+/* === LOC === */
+.loc-card{background:var(--card);border:1px solid var(--border);border-radius:24px;
+padding:48px;position:relative;overflow:hidden}
+.loc-card::before{content:'';position:absolute;top:-150px;right:-150px;
+width:400px;height:400px;border-radius:50%;
+background:radial-gradient(circle,rgba(6,182,212,0.06),transparent 70%)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.loc-flag{font-size:5rem;margin-bottom:14px;display:block}
+.loc-left h3{font-size:1.8rem;font-weight:900;margin-bottom:12px}
+.loc-left p{color:var(--text2);line-height:1.7;font-size:0.95rem}
+.loc-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ls{background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+padding:20px;text-align:center;transition:all 0.3s}
+.ls:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.ls .li{font-size:1.5rem;margin-bottom:6px}
+.ls .lv{font-size:1.5rem;font-weight:800;color:var(--cyan)}
+.ls .ll{font-size:0.75rem;color:var(--text3);margin-top:4px}
+
+/* === CONTACT === */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:20px;
+padding:36px;text-align:center;transition:all 0.4s;position:relative;overflow:hidden}
+.ccard:hover{transform:translateY(-6px)}
+.ccard.cd:hover{border-color:var(--discord);box-shadow:0 20px 50px rgba(88,101,242,0.12)}
+.ccard.cw:hover{border-color:var(--whatsapp);box-shadow:0 20px 50px rgba(37,211,102,0.12)}
+.ccard.cp:hover{border-color:var(--accent-l);box-shadow:0 20px 50px rgba(109,40,217,0.12)}
+.ccard .ce{font-size:3rem;margin-bottom:14px;display:block}
+.ccard h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.ccard p{color:var(--text2);font-size:0.88rem;margin-bottom:22px;line-height:1.6}
+
+/* === FOOTER === */
+footer{border-top:1px solid var(--border);padding:48px 24px 32px;background:var(--bg2)}
+.f-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.f-brand p{color:var(--text3);font-size:0.85rem;line-height:1.6;margin-top:12px;max-width:300px}
+.f-col h4{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+color:var(--accent-l);margin-bottom:14px}
+.f-col a{display:block;color:var(--text3);text-decoration:none;font-size:0.85rem;padding:4px 0;transition:color 0.3s}
+.f-col a:hover{color:var(--text)}
+.f-bottom{text-align:center;padding-top:24px;border-top:1px solid var(--border);
+color:var(--text3);font-size:0.78rem;max-width:1280px;margin:0 auto}
+
+/* === MODAL === */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);
+backdrop-filter:blur(16px);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.mbox{background:var(--card);border:1px solid var(--border2);border-radius:24px;
+max-width:480px;width:100%;overflow:hidden;animation:mIn 0.35s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(24px) scale(0.97)}to{opacity:1;transform:none}}
+.mtop{padding:28px 28px 18px;background:linear-gradient(135deg,rgba(109,40,217,0.06),rgba(6,182,212,0.04));
+border-bottom:1px solid var(--border);position:relative}
+.mx{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+color:var(--text3);width:36px;height:36px;border-radius:10px;cursor:pointer;
+font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.mx:hover{background:rgba(239,68,68,0.1);border-color:var(--red);color:var(--red)}
+.mtop h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.mtop p{color:var(--text3);font-size:0.85rem}
+.mmid{padding:22px 28px;border-bottom:1px solid var(--border);text-align:center}
+.mmid .mlabel{font-size:0.78rem;color:var(--text3);margin-bottom:4px}
+.mmid .mval{font-size:2.2rem;font-weight:900;
+background:var(--accent-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mmid .mper{font-size:0.82rem;color:var(--text3)}
+.mbot{padding:22px 28px 28px}
+.mbot p{color:var(--text3);font-size:0.85rem;margin-bottom:14px;text-align:center}
+.macts{display:flex;flex-direction:column;gap:10px}
+.macts a{text-decoration:none}
+.macts .btn{width:100%;justify-content:center;padding:15px;font-size:0.95rem;border-radius:14px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(0.16,1,0.3,1)}
+.rv.vis{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+.hero-content{grid-template-columns:1fr;text-align:center}
+.hero-desc{margin:0 auto 32px}
+.hero-btns{justify-content:center}
+.hero-trust{justify-content:center}
+.hero-right{display:none}
+.strip-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+.nav-links,.nav-btns{display:none}
+.burger{display:block}
+.strip-grid{grid-template-columns:repeat(2,1fr)}
+.loc-grid{grid-template-columns:1fr}
+.cgrid{grid-template-columns:1fr}
+.f-inner{grid-template-columns:1fr 1fr}
+.pgrid{grid-template-columns:1fr}
+.ggrid{grid-template-columns:1fr}
+.hero{min-height:auto;padding:100px 0 60px}
+}
+@media(max-width:480px){
+.strip-grid{grid-template-columns:1fr 1fr}
+.loc-stats{grid-template-columns:1fr 1fr}
+.f-inner{grid-template-columns:1fr}
+.hero-btns{flex-direction:column;align-items:stretch}
+
+.game-logo{
+width:120px;
+height:auto;
+position:relative;
+z-index:1;
+filter:drop-shadow(0 6px 30px rgba(143, 0, 226, 0.788));
+animation:nodeFloat 5s ease-in-out infinite;
+}
+
+.game-logo.small{
+width:15px;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-orbs"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+<a href="#" class="logo">
+<div class="logo-mark">E</div>
+<div>
+  <div class="logo-text"><span>Elite</span>VPS</div>
+  <div class="logo-tag">🇧🇷 São Paulo, SP</div>
+</div>
+</a>
+<div class="nav-links">
+<a href="#vps">Planos VPS</a>
+<a href="#games">Game Servers</a>
+<a href="#loc">Localização</a>
+<a href="#contact">Contato</a>
+</div>
+<div class="nav-btns">
+<a href="https://discord.gg/TWuDYUfexB" target="_blank" class="btn btn-discord btn-sm">💬 Discord</a>
+<a href="https://wa.me/5575982428741" target="_blank" class="btn btn-wa btn-sm">📱 WhatsApp</a>
+</div>
+<button class="burger" onclick="toggleMob()">☰</button>
+</div>
+</nav>
+
+<div class="mob-menu" id="mob">
+<a href="#vps" onclick="toggleMob()">🖥️ Planos VPS</a>
+<a href="#games" onclick="toggleMob()">🎮 Game Servers</a>
+<a href="#loc" onclick="toggleMob()">📍 Localização</a>
+<a href="#contact" onclick="toggleMob()">📞 Contato</a>
+<div class="mob-btns">
+<a href="https://discord.gg/TWuDYUfexB" target="_blank" class="btn btn-discord" style="justify-content:center">💬 Discord</a>
+<a href="https://wa.me/5575982428741" target="_blank" class="btn btn-wa" style="justify-content:center">📱 WhatsApp</a>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-content">
+<div class="hero-left">
+<div class="hero-badge rv"><span class="pulse-dot"></span> Servidores online — São Paulo/SP 🇧🇷</div>
+<h1 class="rv">Servidores <span class="g">VPS de Alta Performance</span></h1>
+<p class="hero-desc rv">Processadores AMD Ryzen e Intel Xeon de 2 a 28 núcleos. VPS ilimitadas com 1 Gbps, IP dedicado e SSD NVMe no coração de São Paulo. Servidores de DayZ, SCUM e FiveM.</p>
+<div class="hero-btns rv">
+<a href="#vps" class="btn btn-primary">🚀 Ver Planos VPS</a>
+<a href="#games" class="btn btn-ghost">🎮 Game Servers</a>
+<a href="https://discord.gg/TWuDYUfexB" target="_blank" class="btn btn-discord">💬 Discord</a>
+</div>
+<div class="hero-trust rv">
+<div class="trust-item"><span class="ti">⚡</span> 99.9% Uptime</div>
+<div class="trust-item"><span class="ti">♾️</span> VPS Ilimitadas</div>
+<div class="trust-item"><span class="ti">📡</span> 1 Gbps</div>
+<div class="trust-item"><span class="ti">🛡️</span> Anti-DDoS</div>
+</div>
+</div>
+<div class="hero-right">
+<div class="hero-visual">
+<div class="hv-ring r1"></div>
+<div class="hv-ring r2"></div>
+<div class="hv-ring r3"></div>
+<div class="hv-center">🖥️</div>
+<div class="hv-node" style="top:5%;left:50%;transform:translateX(-50%)">⚙️</div>
+<div class="hv-node" style="top:50%;right:2%;transform:translateY(-50%)">💾</div>
+<div class="hv-node" style="bottom:5%;left:50%;transform:translateX(-50%)">📡</div>
+<div class="hv-node" style="top:50%;left:2%;transform:translateY(-50%)">🛡️</div>
+<div class="hv-node" style="top:16%;right:10%">🌐</div>
+<div class="hv-node" style="bottom:16%;left:10%">🔧</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+<div class="container">
+<div class="strip-grid">
+<div class="strip-item rv"><span class="strip-icon">⚙️</span><div><h4>Ryzen & Xeon</h4><p>2 a 28 núcleos</p></div></div>
+<div class="strip-item rv"><span class="strip-icon">💾</span><div><h4>SSD NVMe</h4><p>60 a 300 GB</p></div></div>
+<div class="strip-item rv"><span class="strip-icon">📡</span><div><h4>1 Gbps</h4><p>Internet dedicada</p></div></div>
+<div class="strip-item rv"><span class="strip-icon">🌐</span><div><h4>IP Dedicado</h4><p>1 por VPS</p></div></div>
+<div class="strip-item rv"><span class="strip-icon">🛡️</span><div><h4>Anti-DDoS</h4><p>Proteção inclusa</p></div></div>
+<div class="strip-item rv"><span class="strip-icon">🇧🇷</span><div><h4>São Paulo</h4><p>Datacenter BR</p></div></div>
+</div>
+</div>
+</div>
+
+<!-- PLANS -->
+<section class="section" id="vps">
+<div class="container">
+<div class="s-head rv">
+<div class="s-label">⚡ Planos VPS</div>
+<h2>Escolha seu Servidor VPS</h2>
+<p>Todos os planos incluem tráfego ilimitado, 1 Gbps, 1 IP dedicado e proteção Anti-DDoS.</p>
+</div>
+<div class="tabs rv" id="tabs"></div>
+<div class="pgrid" id="pgrid"></div>
+</div>
+</section>
+
+<!-- GAMES -->
+<section class="section" id="games" style="background:linear-gradient(180deg,transparent,rgba(245,158,11,0.015),transparent)">
+<div class="container">
+<div class="s-head rv">
+<div class="s-label" style="color:var(--gold);background:rgba(245,158,11,0.08)">🎮 Game Servers</div>
+<h2>Servidores de Jogos Dedicados</h2>
+<p>Criação e hospedagem profissional de servidores DayZ, SCUM e FiveM.</p>
+</div>
+<div class="ggrid">
+
+<div class="gcard rv">
+<div class="gbanner dayz">
+<img src="img/dayz.png" class="game-logo">
+<div class="gover"><h3>DayZ</h3><span>Servidor Dedicado</span></div>
+</div>
+<div class="gbody">
+<ul class="gfeats">
+<li><span class="si">🔧</span> Instalação e configuração completa</li>
+<li><span class="si">🧩</span> Suporte total a mods (Workshop)</li>
+<li><span class="si">👥</span> Até 60+ jogadores simultâneos</li>
+<li><span class="si">🛡️</span> Anti-DDoS + Anti-Cheat</li>
+<li><span class="si">📡</span> 1 Gbps dedicada + 1 IP dedicado</li>
+<li><span class="si">💾</span> Backups automáticos + Restarts</li>
+</ul>
+<div class="gprice"><span class="gprice-l">A partir de</span><span class="gprice-v">R$ 100,00/mês</span></div>
+<button class="btn btn-game" style="background:linear-gradient(135deg,#6d28d9,#1e40af)" onclick="openM('Servidor DayZ','Criação completa de servidor DayZ com mods, Anti-DDoS, 1 Gbps e IP dedicado','R$ 100,00')">🎮 Contratar Servidor DayZ</button>
+</div>
+</div>
+
+<div class="gcard rv">
+<div class="gbanner scum">
+<img src="img/scum.png" class="game-logo">
+<div class="gover"><h3>SCUM</h3><span>Servidor Dedicado</span></div>
+</div>
+<div class="gbody">
+<ul class="gfeats">
+<li><span class="si">🔧</span> Setup completo e otimizado</li>
+<li><span class="si">🧩</span> Suporte a mods e plugins</li>
+<li><span class="si">👥</span> Até 64+ jogadores simultâneos</li>
+<li><span class="si">🛡️</span> Anti-DDoS + Anti-Cheat</li>
+<li><span class="si">📡</span> 1 Gbps dedicada + 1 IP dedicado</li>
+<li><span class="si">💾</span> Backups automáticos + Restarts</li>
+</ul>
+<div class="gprice"><span class="gprice-l">A partir de</span><span class="gprice-v">R$ 100,00/mês</span></div>
+<button class="btn btn-game" style="background:linear-gradient(135deg,#166534,#0f766e)" onclick="openM('Servidor SCUM','Criação completa de servidor SCUM com mods, Anti-DDoS, 1 Gbps e IP dedicado','R$ 100,00')">🎮 Contratar Servidor SCUM</button>
+</div>
+</div>
+
+<div class="gcard rv">
+<div class="gbanner fivem">
+<img src="img/fivem.png" class="game-logo">
+<div class="gover"><h3>FiveM</h3><span>Servidor Dedicado</span></div>
+</div>
+<div class="gbody">
+<ul class="gfeats">
+<li><span class="si">🔧</span> Instalação e configuração completa</li>
+<li><span class="si">🧩</span> Scripts, mapas e veículos customizados</li>
+<li><span class="si">👥</span> Até 128+ jogadores simultâneos</li>
+<li><span class="si">🛡️</span> Anti-DDoS + Anti-Cheat</li>
+<li><span class="si">📡</span> 1 Gbps dedicada + 1 IP dedicado</li>
+<li><span class="si">💾</span> Backups automáticos + Restarts</li>
+</ul>
+<div class="gprice"><span class="gprice-l">A partir de</span><span class="gprice-v">R$ 150,00/mês</span></div>
+<button class="btn btn-game" style="background:linear-gradient(135deg,#92400e,#b45309)" onclick="openM('Servidor FiveM','Criação completa de servidor FiveM com scripts, Anti-DDoS, 1 Gbps e IP dedicado','R$ 150,00')">🎮 Contratar Servidor FiveM</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" id="loc">
+<div class="container">
+<div class="s-head rv">
+<div class="s-label">📍 Localização</div>
+<h2>Datacenter em São Paulo</h2>
+<p>Infraestrutura de ponta no coração do Brasil.</p>
+</div>
+<div class="loc-card rv">
+<div class="loc-grid">
+<div class="loc-left">
+<span class="loc-flag">🇧🇷</span>
+<h3>São Paulo — SP, Brasil</h3>
+<p>Nossos servidores estão hospedados em datacenter Tier III+ no estado de São Paulo, oferecendo a menor latência possível para clientes em todo o território brasileiro e América Latina. Infraestrutura redundante com energia e rede de alta disponibilidade, garantindo 99.9% de uptime.</p>
+</div>
+<div class="loc-stats">
+<div class="ls"><div class="li">⚡</div><div class="lv">99.9%</div><div class="ll">Uptime Garantido</div></div>
+<div class="ls"><div class="li">📡</div><div class="lv">&lt;5ms</div><div class="ll">Latência SP</div></div>
+<div class="ls"><div class="li">🛡️</div><div class="lv">Tier III+</div><div class="ll">Certificação DC</div></div>
+<div class="ls"><div class="li">🔌</div><div class="lv">N+1</div><div class="ll">Redundância</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+<div class="container">
+<div class="s-head rv">
+<div class="s-label">📞 Contato</div>
+<h2>Fale com a Gente</h2>
+<p>Precisa de ajuda ou quer um plano personalizado? Fale diretamente com o dono!</p>
+</div>
+<div class="cgrid">
+<div class="ccard cd rv">
+<img src="img/discord.png" style="width:40px;margin-bottom:14px">
+<h3>Discord</h3>
+<p>Entre no nosso servidor do Discord para suporte, novidades e comunidade.</p>
+<a href="https://discord.gg/TWuDYUfexB" target="_blank" class="btn btn-discord" style="width:100%;justify-content:center">💬 Entrar no Discord</a>
+</div>
+<div class="ccard cw rv">
+<img src="img/whatsapp.png" style="width:40px;margin-bottom:14px">
+<h3>WhatsApp</h3>
+<p>Fale diretamente com o dono pelo WhatsApp para suporte rápido e vendas.</p>
+<a href="https://wa.me/5575982428741" target="_blank" class="btn btn-wa" style="width:100%;justify-content:center">📱 Chamar no WhatsApp</a>
+</div>
+<div class="ccard cp rv">
+<img src="img/plano personalizado.png" style="width:40px;margin-bottom:14px">
+<h3>Plano Personalizado</h3>
+<p>Precisa de algo específico? Criamos uma VPS sob medida para o seu projeto.</p>
+<a href="https://discord.gg/TWuDYUfexB" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">🛠️ Solicitar Personalizado</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="f-inner">
+<div class="f-brand">
+<a href="#" class="logo">
+<div class="logo-mark">E</div>
+<div><div class="logo-text"><span>Elite</span>VPS</div></div>
+</a>
+<p>Servidores VPS de alta performance com processadores AMD Ryzen e Intel Xeon. Hospedado em São Paulo/SP, Brasil. Criação de servidores DayZ, SCUM e FiveM.</p>
+</div>
+<div class="f-col">
+<h4>Produtos</h4>
+<a href="#vps">Planos VPS</a>
+<a href="#games">DayZ Server</a>
+<a href="#games">SCUM Server</a>
+<a href="#games">FiveM Server</a>
+</div>
+<div class="f-col">
+<h4>Empresa</h4>
+<a href="#loc">Localização</a>
+<a href="#contact">Contato</a>
+<a href="#vps">Preços</a>
+</div>
+<div class="f-col">
+<h4>Contato</h4>
+<a href="https://discord.gg/TWuDYUfexB" target="_blank">💬 Discord</a>
+<a href="https://wa.me/5575982428741" target="_blank">📱 WhatsApp</a>
+<a href="#">🇧🇷 São Paulo, SP</a>
+</div>
+</div>
+<div class="f-bottom">
+<p>© 2026 <strong>EliteVPS</strong> — Todos os direitos reservados. São Paulo — SP, Brasil 🇧🇷</p>
+</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeMOut(event)">
+<div class="mbox">
+<div class="mtop">
+<button class="mx" onclick="closeM()">✕</button>
+<h3 id="mt">🛒 Contratar</h3>
+<p id="md"></p>
+</div>
+<div class="mmid">
+<div class="mlabel">Valor mensal</div>
+<div class="mval" id="mp"></div>
+<div class="mper">por mês</div>
+</div>
+<div class="mbot">
+<p>Escolha como deseja finalizar a compra:</p>
+<div class="macts">
+<a href="https://discord.gg/TWuDYUfexB" target="_blank"><div class="btn btn-discord">💬 Comprar via Discord</div></a>
+<a href="https://wa.me/5575982428741" target="_blank"><div class="btn btn-wa">📱 Comprar via WhatsApp</div></a>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const plans=[
+{n:"VPS Starter",cpu:"AMD Ryzen",t:"ryzen",c:2,ram:"2 GB",d:"60 GB",p:40,hot:0},
+{n:"VPS Basic",cpu:"Intel Xeon",t:"xeon",c:2,ram:"4 GB",d:"80 GB",p:60,hot:0},
+{n:"VPS Plus",cpu:"AMD Ryzen",t:"ryzen",c:4,ram:"6 GB",d:"100 GB",p:100,hot:1},
+{n:"VPS Pro",cpu:"Intel Xeon",t:"xeon",c:6,ram:"8 GB",d:"120 GB",p:150,hot:0},
+{n:"VPS Business",cpu:"AMD Ryzen",t:"ryzen",c:8,ram:"12 GB",d:"150 GB",p:200,hot:0},
+{n:"VPS Enterprise",cpu:"Intel Xeon",t:"xeon",c:12,ram:"16 GB",d:"200 GB",p:365,hot:0},
+{n:"VPS Power",cpu:"AMD Ryzen",t:"ryzen",c:20,ram:"32 GB",d:"250 GB",p:580,hot:0},
+{n:"VPS Ultimate",cpu:"Intel Xeon",t:"xeon",c:28,ram:"64 GB",d:"300 GB",p:800,hot:0}
+];
+let filt='all';
+
+function render(){
+const g=document.getElementById('pgrid');
+const f=filt==='all'?plans:plans.filter(x=>x.t===filt);
+g.innerHTML=f.map(p=>`
+<div class="pcard rv ${p.hot?'hot':''}">
+${p.hot?'<div class="hot-tag">🔥 Mais Vendido</div>':''}
+<div class="phead">
+<div class="cpu-tag ${p.t==='ryzen'?'cpu-ryzen':'cpu-xeon'}">${p.t==='ryzen'?'🔴 AMD Ryzen':'🔵 Intel Xeon'}</div>
+<div class="pname">${p.n}</div>
+<div class="pprice"><span class="cur">R$</span><span class="val">${p.p}</span><span class="c">,00</span></div>
+<div class="pper">/mês</div>
+</div>
+<div class="pbody">
+<ul class="pspecs">
+<li><span class="si">⚙️</span><strong>${p.c} vCPUs</strong> — ${p.cpu}</li>
+<li><span class="si">🧠</span><strong>${p.ram}</strong> RAM DDR4 ECC</li>
+<li><span class="si">💾</span><strong>${p.d}</strong> SSD NVMe</li>
+<li><span class="si">📡</span><strong>1 Gbps</strong> Internet Dedicada</li>
+<li><span class="si">🌐</span><strong>1 IP Dedicado</strong> incluso</li>
+<li><span class="si">🛡️</span>Anti-DDoS incluso</li>
+<li><span class="si">♾️</span><span class="unlimited">∞ Tráfego Ilimitado</span></li>
+</ul>
+<button class="btn btn-buy" onclick="openM('${p.n}','${p.c} vCPUs ${p.cpu} • ${p.ram} RAM • ${p.d} SSD NVMe • 1 Gbps • IP Dedicado','R$ ${p.p},00')">🛒 Contratar Agora</button>
+</div>
+</div>`).join('');
+initRv();
+}
+
+function setFilt(t,el){
+filt=t;
+document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+el.classList.add('on');
+render();
+}
+
+// Tabs
+document.getElementById('tabs').innerHTML=`
+<button class="tab on" onclick="setFilt('all',this)">Todos</button>
+<button class="tab" onclick="setFilt('ryzen',this)">🔴 AMD Ryzen</button>
+<button class="tab" onclick="setFilt('xeon',this)">🔵 Intel Xeon</button>`;
+
+// Modal
+function openM(t,d,p){
+document.getElementById('mt').textContent='🛒 '+t;
+document.getElementById('md').textContent=d;
+document.getElementById('mp').textContent=p;
+document.getElementById('modalBg').classList.add('open');
+document.body.style.overflow='hidden';
+}
+function closeM(){document.getElementById('modalBg').classList.remove('open');document.body.style.overflow=''}
+function closeMOut(e){if(e.target===e.currentTarget)closeM()}
+
+// Mobile
+function toggleMob(){document.getElementById('mob').classList.toggle('open')}
+
+// Nav scroll
+let lastS=0;
+window.addEventListener('scroll',()=>{
+const n=document.getElementById('nav');
+if(window.scrollY>50)n.classList.add('scrolled');else n.classList.remove('scrolled');
+const m=document.getElementById('mob');
+if(m.classList.contains('open'))m.classList.remove('open');
+});
+
+// Reveal
+function initRv(){
+const ob=new IntersectionObserver(es=>{
+es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ob.unobserve(e.target)}})
+},{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv:not(.vis)').forEach(el=>ob.observe(el));
+}
+
+render();
+initRv();
+</script>
+</body>
+</html>
+```
